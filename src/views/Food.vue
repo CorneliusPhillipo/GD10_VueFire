@@ -146,6 +146,7 @@
 <script>
 
     //tambahkan ini untuk import database reference
+    import {dessRef} from '../firebase'
 
     export default {
         data: () => ({
@@ -183,6 +184,9 @@
         }),
 
         //tambahkan attribute firebase disini
+        firebase: {
+            desserts: dessRef,
+        },
 
         computed: {
             formTitle () {
@@ -216,6 +220,15 @@
             deleteItemConfirm () {
                 
                 //tambahkan ini untuk delete data
+                dessRef
+                    .child(this.editedIndex)
+                    .remove()
+                    .then(()=>{
+                        alert('Berhasil hapus data!')
+                    })
+                    .catch((err)=>[
+                        alert("Gagal hapus data:",err)
+                    ])
 
                 this.closeDelete()
             },
@@ -240,11 +253,28 @@
                 if (this.editedIndex != -1) {
 
                     //tambahkan ini untuk edit data
+                    dessRef
+                        .child(this.editedIndex)
+                        .set(this.editedItem)
+                        .then(()=>{
+                            alert('Berhasil edit data!!')
+                        })
+                        .catch((err)=>{
+                            alert("Gagal edit data:",err)
+                        })
 
 
                 } else {
 
                     //tambahkan code ini untuk create data ke db
+                    dessRef
+                        .push(this.editedItem)
+                        .then(()=>{
+                            alert('Berhasil tambah data!!')
+                        })
+                        .catch((err)=>[
+                            alert("Gagal Tambah data: ",err)
+                        ])
 
                     
                 }
