@@ -6,3 +6,6 @@ export const db = firebase
     .database()
 
     export const dessRef = db.ref('desserts')
+    export const bevRef = db.ref('beverage')
+
+

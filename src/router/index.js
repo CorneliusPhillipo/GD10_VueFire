@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/drink',
     name: 'Drink',
-    component: null
+    component: () => import( '../views/Beverage.vue')
   }
 ]
 
